@@ -9,24 +9,16 @@ import { MonoText } from '../components/StyledText';
 export default function HomeScreen() {
   const [name, setName] = useState('counter')
   const [count, setCount] = useState(0)
+  const [numberAnswer, setNumberAnswer] = useState(null)
 
   useEffect(() => {
-    const db = SQLite.openDatabase("counters")
+    const db = SQLite.openDatabase("diaryCard")
     db.transaction((tx) => {
-      tx.executeSql(`CREATE TABLE IF NOT EXISTS counters (
-        name STRING NOT NULL UNIQUE,
-        total INTEGER NOT NULL DEFAULT 0)
+      tx.executeSql(`CREATE TABLE IF NOT EXISTS responses (
+        question STRING NOT NULL,
+        date TEXT,
+        answer INTEGER NOT NULL DEFAULT 0)
       `);
-      tx.executeSql(
-        `INSERT OR IGNORE INTO counters(name, total) VALUES("counter", 0)`,
-        [], console.log, console.log);
-    });
-    db.transaction((tx) => {
-      tx.executeSql(
-        `SELECT total FROM counters WHERE counters.name="counter"`,
-        [],
-        (transaction, result) => { setCount(result.rows.item(0).total) },
-        console.log);
     });
   }, []);
 
@@ -45,8 +37,16 @@ export default function HomeScreen() {
   }
 
   const handleNextPress = () => {
-    
+    const db = SQLite.openDatabase("diaryCard")
+    db.transaction((tx) => {
+      tx.executeSql(`INSERT INTO responses (question, answer) VALUES ("how are you?", ${numberAnswer})`, [], console.log, console.log);
 
+    // then go to next page
+  });
+}
+
+  const handleNumberPress = (i) => {
+    setNumberAnswer(i)
   }
 
   return (
@@ -70,17 +70,30 @@ export default function HomeScreen() {
           style={styles.helpLink}
           onPress={updateCount}
         >
+
           <Text>COOL BUTTON {count}</Text>
         </TouchableOpacity>
-        
+
+
+
+        {[0, 1, 2, 3, 4, 5].map((i) => {
+          return(
+          <TouchableOpacity
+            style={i === numberAnswer ? styles.standardButton : styles.highlightedButton}
+            onPress={() => { handleNumberPress(i) }}>
+            <Text>{i}</Text>
+          </TouchableOpacity>
+        )})}
+
+        <Text>{'numberAnswer:'}{numberAnswer}</Text>
+
         <TouchableOpacity
           style={styles.helpLink}
           onPress={handleNextPress}
         >
           <Text>Next</Text>
         </TouchableOpacity>
-    
-        
+
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
@@ -141,6 +154,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  highlightedButton: {
+    backgroundColor: '#f59',
+  },
+  standardButton: {
+    backgroundColor: '#9af',
   },
   developmentModeText: {
     marginBottom: 20,
