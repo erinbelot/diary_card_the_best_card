@@ -49,6 +49,8 @@ export default function HomeScreen() {
     setNumberAnswer(i)
   }
 
+  const valueToSymbols = ['▁','▂','▆','█']
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -59,8 +61,8 @@ export default function HomeScreen() {
           <Image
             source={
               __DEV__
-                ? require("../assets/images/robot-dev.png")
-                : require("../assets/images/robot-prod.png")
+                ? require("../assets/images/green-man.png")
+                : require("../assets/images/green-man.png")
             }
             style={styles.welcomeImage}
           />
@@ -70,22 +72,27 @@ export default function HomeScreen() {
           style={styles.helpLink}
           onPress={updateCount}
         >
-
-          <Text>COOL BUTTON {count}</Text>
+          <Text style={styles.developmentModeText}>How strong was your urge to gamble?</Text>
+        
         </TouchableOpacity>
 
+        <View>
+          <View style={styles.answerOptions}>
+            {[0, 1, 2, 3].map((i) => {
+              return(
+              <TouchableOpacity
+                key={`option_${i}`}
+                style={i === numberAnswer ? styles.highlightedButton : styles.standardButton}
+                onPress={() => { handleNumberPress(i) }}>
+                <Text>{valueToSymbols[i]}</Text>
+              </TouchableOpacity>
+            )})}
+          </View>
 
-
-        {[0, 1, 2, 3, 4, 5].map((i) => {
-          return(
-          <TouchableOpacity
-            style={i === numberAnswer ? styles.standardButton : styles.highlightedButton}
-            onPress={() => { handleNumberPress(i) }}>
-            <Text>{i}</Text>
-          </TouchableOpacity>
-        )})}
-
-        <Text>{'numberAnswer:'}{numberAnswer}</Text>
+          {/* <View style={styles.answerOption}>
+            <Text>{'numberAnswer:'}{numberAnswer}</Text>
+          </View> */}
+        </View>
 
         <TouchableOpacity
           style={styles.helpLink}
@@ -157,14 +164,36 @@ const styles = StyleSheet.create({
   },
   highlightedButton: {
     backgroundColor: '#f59',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: 'gray',
+    borderRadius: 100,
+    height: 70,
+    width: 70,
+    padding: 10,
+    display: 'flex',
+    margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center',    
   },
   standardButton: {
     backgroundColor: '#9af',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: 'gray',
+    borderRadius: 100,
+    height: 70,
+    width: 70,
+    padding: 10,
+    display: 'flex',
+    margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center',    
   },
   developmentModeText: {
     marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
+    fontSize: 20,
     lineHeight: 19,
     textAlign: 'center',
   },
@@ -177,8 +206,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 300,
+    height: 300,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
@@ -238,9 +267,22 @@ const styles = StyleSheet.create({
   },
   helpLink: {
     paddingVertical: 15,
+    fontSize: 37,
+
   },
   helpLinkText: {
     fontSize: 14,
     color: '#2e78b7',
   },
+
+  answerOptions: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+
+  answerOption: {
+
+  }  
 });
