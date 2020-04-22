@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import * as SQLite from 'expo-sqlite';
 
 import { MonoText } from '../components/StyledText';
+import  HappinessButton  from '../components/HappinessButton';
 
 export default function HomeScreen() {
   const [name, setName] = useState('counter')
@@ -42,8 +43,8 @@ export default function HomeScreen() {
       tx.executeSql(`INSERT INTO responses (question, answer) VALUES ("how are you?", ${numberAnswer})`, [], console.log, console.log);
 
     // then go to next page
-  });
-}
+    });
+  }
 
   const handleNumberPress = (i) => {
     setNumberAnswer(i)
@@ -73,26 +74,33 @@ export default function HomeScreen() {
           onPress={updateCount}
         >
           <Text style={styles.developmentModeText}>How strong was your urge to gamble?</Text>
-        
+         
         </TouchableOpacity>
 
-        <View>
-          <View style={styles.answerOptions}>
-            {[0, 1, 2, 3].map((i) => {
-              return(
-              <TouchableOpacity
-                key={`option_${i}`}
-                style={i === numberAnswer ? styles.highlightedButton : styles.standardButton}
-                onPress={() => { handleNumberPress(i) }}>
-                <Text>{valueToSymbols[i]}</Text>
-              </TouchableOpacity>
-            )})}
-          </View>
+        <View style={styles.answerOptions}>
+          {[0, 1, 2, 3].map ((n,i) => 
+          {
+            return (
+              <>
+                <HappinessButton key={`key_${n}`} amount={n}/>
+                <TouchableOpacity
+                  key={`option_${i}`}
+                  style={i === numberAnswer ? styles.highlightedButton : styles.standardButton}
+                  onPress={() => { handleNumberPress(i) }}>
+                  <Text>{valueToSymbols[i]}</Text>
+                </TouchableOpacity>
+            </>)
+          })}
+        </View> 
+        
+      
+              
+          
 
-          {/* <View style={styles.answerOption}>
+          {/* {/ <View style={styles.answerOption}>
             <Text>{'numberAnswer:'}{numberAnswer}</Text>
-          </View> */}
-        </View>
+          </View> } */}
+        
 
         <TouchableOpacity
           style={styles.helpLink}
