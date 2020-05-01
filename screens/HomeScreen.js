@@ -5,8 +5,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import * as SQLite from 'expo-sqlite';
 
 import { MonoText } from '../components/StyledText';
-import  HappinessButton  from '../components/HappinessButton';
-
+import HabitLayout from '../screens/HabitLayout';
+// import NavigationBar from '../navigation/BottomTabNavigator';
 export default function HomeScreen() {
   const [name, setName] = useState('counter')
   const [count, setCount] = useState(0)
@@ -49,83 +49,8 @@ export default function HomeScreen() {
   const handleNumberPress = (i) => {
     setNumberAnswer(i)
   }
-
-  const valueToSymbols = ['▁','▂','▆','█']
-
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require("../assets/images/green-man.png")
-                : require("../assets/images/green-man.png")
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={styles.helpLink}
-          onPress={updateCount}
-        >
-          <Text style={styles.developmentModeText}>How strong was your urge to gamble?</Text>
-         
-        </TouchableOpacity>
-
-        <View style={styles.answerOptions}>
-          {[0, 1, 2, 3].map ((n,i) => 
-          {
-            return (
-              <>
-                <HappinessButton key={`key_${n}`} amount={n}/>
-                <TouchableOpacity
-                  key={`option_${i}`}
-                  style={i === numberAnswer ? styles.highlightedButton : styles.standardButton}
-                  onPress={() => { handleNumberPress(i) }}>
-                  <Text>{valueToSymbols[i]}</Text>
-                </TouchableOpacity>
-            </>)
-          })}
-        </View> 
-        
-      
-              
-          
-
-          {/* {/ <View style={styles.answerOption}>
-            <Text>{'numberAnswer:'}{numberAnswer}</Text>
-          </View> } */}
-        
-
-        <TouchableOpacity
-          style={styles.helpLink}
-          onPress={handleNextPress}
-        >
-          <Text>Next</Text>
-        </TouchableOpacity>
-
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}
-        >
-          <MonoText style={styles.codeHighlightText}>
-            navigation/BottomTabNavigator.js
-          </MonoText>
-        </View>
-      </View>
-    </View>
-  );
+  return <HabitLayout numberAnswer={numberAnswer} handleNumberPress={handleNumberPress} /> 
+  
 }
 
 HomeScreen.navigationOptions = {
@@ -197,13 +122,6 @@ const styles = StyleSheet.create({
     margin: 5,
     alignItems: 'center',
     justifyContent: 'center',    
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 20,
-    lineHeight: 19,
-    textAlign: 'center',
   },
   contentContainer: {
     paddingTop: 30,
