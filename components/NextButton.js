@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
-export default function NextButton( { handleNextPress } ) { 
+export default function NextButton( { onPress } ) { 
   return(
-    <TouchableOpacity style={styles.nextButton} onPress={handleNextPress}>
+    <TouchableOpacity style={styles.nextButton} onPress={onPress}>
       <Text>Next</Text>
     </TouchableOpacity>
   )}

@@ -6,11 +6,16 @@ import * as SQLite from 'expo-sqlite';
 
 import { MonoText } from '../components/StyledText';
 import HabitLayout from '../screens/HabitLayout';
+import QuestionLayout from '../screens/QuestionLayout';
 // import NavigationBar from '../navigation/BottomTabNavigator';
+
 export default function HomeScreen() {
   const [name, setName] = useState('counter')
   const [count, setCount] = useState(0)
   const [numberAnswer, setNumberAnswer] = useState(null)
+  const [currentPageNumber, setCurrentPageNumber] = useState(0)
+
+
 
   useEffect(() => {
     const db = SQLite.openDatabase("diaryCard")
@@ -37,19 +42,32 @@ export default function HomeScreen() {
     });
   }
 
-  const handleNextPress = () => {
+  const saveHabitLayout = () => {
     const db = SQLite.openDatabase("diaryCard")
     db.transaction((tx) => {
       tx.executeSql(`INSERT INTO responses (question, answer) VALUES ("how are you?", ${numberAnswer})`, [], console.log, console.log);
-
-    // then go to next page
     });
+  }
+
+  const handleNextPress = () => {
+    console.log('hi')
+    setCurrentPageNumber(currentPageNumber + 1);
   }
 
   const handleNumberPress = (i) => {
     setNumberAnswer(i)
   }
-  return <HabitLayout numberAnswer={numberAnswer} handleNumberPress={handleNumberPress} /> 
+
+  const pages = [
+    <HabitLayout
+      numberAnswer={numberAnswer}
+      handleNumberPress={handleNumberPress}
+      handleNextPress={handleNextPress}
+      saveHabitLayout={saveHabitLayout}
+    />,
+    <QuestionLayout />,
+  ];
+  return pages[currentPageNumber]
   
 }
 

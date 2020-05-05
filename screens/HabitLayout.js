@@ -4,7 +4,13 @@ import  HappinessButton  from '../components/HappinessButton';
 import NextButton from '../components/NextButton';
 import  ListOfRangeButtons from '../components/ListOfRangeButtons';
 
-export default function HabitLayout( { numberAnswer, handleNumberPress  } ) { 
+export default function HabitLayout( { numberAnswer, handleNumberPress, handleNextPress, saveHabitLayout} ) { 
+  const handleSaveAndNext = () => {
+    console.log('handleSaveAndNext')
+    saveHabitLayout()
+    handleNextPress()
+  }
+
   return (
     <>
       <View style={styles.welcomeContainer}>
@@ -19,7 +25,7 @@ export default function HabitLayout( { numberAnswer, handleNumberPress  } ) {
       </View>
       <Text style={styles.developmentModeText}>How strong was your urge to gamble?</Text>
       <ListOfRangeButtons numberAnswer={numberAnswer} handleNumberPress={handleNumberPress} />
-      <NextButton/>
+      <NextButton onPress={handleSaveAndNext} />
     </>
   )};
 
