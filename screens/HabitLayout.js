@@ -4,13 +4,7 @@ import  HappinessButton  from '../components/HappinessButton';
 import NextButton from '../components/NextButton';
 import  ListOfRangeButtons from '../components/ListOfRangeButtons';
 
-export default function HabitLayout( { numberAnswer, handleNumberPress, handleNextPress, saveHabitLayout} ) { 
-  const handleSaveAndNext = () => {
-    console.log('handleSaveAndNext')
-    saveHabitLayout()
-    handleNextPress()
-  }
-
+export default function HabitLayout( { pageAnswer, setPageAnswer, handleSaveAndNext, question } ) {
   return (
     <>
       <View style={styles.welcomeContainer}>
@@ -23,9 +17,9 @@ export default function HabitLayout( { numberAnswer, handleNumberPress, handleNe
           style={styles.welcomeImage}
         />
       </View>
-      <Text style={styles.developmentModeText}>How strong was your urge to gamble?</Text>
-      <ListOfRangeButtons numberAnswer={numberAnswer} handleNumberPress={handleNumberPress} />
-      <NextButton onPress={handleSaveAndNext} />
+      <Text style={styles.developmentModeText}>{question}</Text>
+      <ListOfRangeButtons questions={[0,1,2,3]} useSymbols pageAnswer={pageAnswer} setPageAnswer={setPageAnswer} />
+      <NextButton onPress={() => { handleSaveAndNext(question) }} />
     </>
   )};
 

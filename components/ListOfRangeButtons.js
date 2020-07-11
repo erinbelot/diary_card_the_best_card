@@ -1,27 +1,26 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
-import HappinessButton from '../components/HappinessButton';
+// import HappinessButton from '../components/HappinessButton';
 const valueToSymbols = ['▁','▂','▆','█']
 
-export default function ListOfRangeButtons( { numberAnswer, handleNumberPress } ) { 
+export default function ListOfRangeButtons( { questions, useSymbols, pageAnswer, setPageAnswer } ) {
   return (
     <View style={styles.answerOptions}>
-          {[0, 1, 2, 3].map ((n,i) => 
+          {questions.map ((n) =>
           {
             return (
               <View key={`key_${n}`}>
-                <HappinessButton key={`key_${n}`} amount={n}/>
                 <TouchableOpacity
-                  key={`option_${i}`}
-                  style={i === numberAnswer ? styles.highlightedButton : styles.standardButton}
-                  onPress={() => { handleNumberPress(i) }}>
-                  <Text>{valueToSymbols[i]}</Text>
+                  key={`option_${n}`}
+                  style={n === pageAnswer ? styles.highlightedButton : styles.standardButton}
+                  onPress={() => { setPageAnswer(n) }}>
+                  <Text>{useSymbols ? valueToSymbols[n] : n}</Text>
                 </TouchableOpacity>
               </View>
             )
           })}
         </View>
-        
+
  )};
 
  const styles = StyleSheet.create({
@@ -41,7 +40,7 @@ export default function ListOfRangeButtons( { numberAnswer, handleNumberPress } 
     display: 'flex',
     margin: 5,
     alignItems: 'center',
-    justifyContent: 'center',    
+    justifyContent: 'center',
   },
   standardButton: {
     backgroundColor: '#9af',
@@ -55,7 +54,7 @@ export default function ListOfRangeButtons( { numberAnswer, handleNumberPress } 
     display: 'flex',
     margin: 5,
     alignItems: 'center',
-    justifyContent: 'center',    
+    justifyContent: 'center',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -151,5 +150,5 @@ export default function ListOfRangeButtons( { numberAnswer, handleNumberPress } 
 
   answerOption: {
 
-  }  
+  }
 });
