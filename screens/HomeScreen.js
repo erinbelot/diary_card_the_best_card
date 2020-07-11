@@ -10,12 +10,8 @@ import QuestionLayout from '../screens/QuestionLayout';
 // import NavigationBar from '../navigation/BottomTabNavigator';
 
 export default function HomeScreen() {
-  const [name, setName] = useState('counter')
-  const [count, setCount] = useState(0)
-  const [numberAnswer, setNumberAnswer] = useState(null)
+  const [pageAnswer, setPageAnswer] = useState(null)
   const [currentPageNumber, setCurrentPageNumber] = useState(0)
-
-
 
   useEffect(() => {
     const db = SQLite.openDatabase("diaryCard")
@@ -23,52 +19,43 @@ export default function HomeScreen() {
       tx.executeSql(`CREATE TABLE IF NOT EXISTS responses (
         question STRING NOT NULL,
         date TEXT,
-        answer INTEGER NOT NULL DEFAULT 0)
+        answer TEXT NOT NULL DEFAULT '')
       `);
     });
   }, []);
 
-  const updateCount = (increase) => {
-    const db = SQLite.openDatabase("counters")
-    db.transaction((tx) => {
-      tx.executeSql(`UPDATE counters SET total=total+1 WHERE name="counter"`, [], console.log, console.log);
-
-      tx.executeSql(
-        `SELECT counters.total FROM counters WHERE counters.name="counter"`,
-        [],
-        (transaction, result) => { setCount(result.rows.item(0).total) },
-        console.log
-      );
-    });
-  }
-
-  const saveHabitLayout = () => {
+  const saveResponse = (question) => {
     const db = SQLite.openDatabase("diaryCard")
     db.transaction((tx) => {
-      tx.executeSql(`INSERT INTO responses (question, answer) VALUES ("how are you?", ${numberAnswer})`, [], console.log, console.log);
+      tx.executeSql(`INSERT INTO responses (question, answer) VALUES (${question}, ${pageAnswer})`, []);
     });
   }
 
   const handleNextPress = () => {
-    console.log('hi')
-    setCurrentPageNumber(currentPageNumber + 1);
+    setCurrentPageNumber(currentPageNumber + 1 == pages.length ? 0 : currentPageNumber + 1);
   }
 
-  const handleNumberPress = (i) => {
-    setNumberAnswer(i)
+  const handleSaveAndNext = (question) => {
+    saveResponse(question)
+    handleNextPress()
   }
 
   const pages = [
     <HabitLayout
-      numberAnswer={numberAnswer}
-      handleNumberPress={handleNumberPress}
-      handleNextPress={handleNextPress}
-      saveHabitLayout={saveHabitLayout}
+      question="gamble?"
+      pageAnswer={pageAnswer}
+      handleSaveAndNext={handleSaveAndNext}
+      setPageAnswer={setPageAnswer}
     />,
-    <QuestionLayout />,
+    <QuestionLayout
+      question="outside?"
+      handleSaveAndNext={handleSaveAndNext}
+      setPageAnswer={setPageAnswer}
+      pageAnswer={pageAnswer}
+    />,
   ];
   return pages[currentPageNumber]
-  
+
 }
 
 HomeScreen.navigationOptions = {
@@ -125,7 +112,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     margin: 5,
     alignItems: 'center',
-    justifyContent: 'center',    
+    justifyContent: 'center',
   },
   standardButton: {
     backgroundColor: '#9af',
@@ -139,7 +126,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     margin: 5,
     alignItems: 'center',
-    justifyContent: 'center',    
+    justifyContent: 'center',
   },
   contentContainer: {
     paddingTop: 30,
@@ -228,5 +215,5 @@ const styles = StyleSheet.create({
 
   answerOption: {
 
-  }  
+  }
 });
