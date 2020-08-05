@@ -7,6 +7,8 @@ import * as SQLite from 'expo-sqlite';
 import { MonoText } from '../components/StyledText';
 import HabitLayout from '../screens/HabitLayout';
 import QuestionLayout from '../screens/QuestionLayout';
+import HappyFeelingsLayout from '../screens/HappyFeelingsLayout';
+
 // import NavigationBar from '../navigation/BottomTabNavigator';
 
 export default function HomeScreen() {
@@ -49,6 +51,12 @@ export default function HomeScreen() {
     />,
     <QuestionLayout
       question="outside?"
+      handleSaveAndNext={handleSaveAndNext}
+      setPageAnswer={setPageAnswer}
+      pageAnswer={pageAnswer}
+    />,
+    <HappyFeelingsLayout
+      question="happy?"
       handleSaveAndNext={handleSaveAndNext}
       setPageAnswer={setPageAnswer}
       pageAnswer={pageAnswer}
