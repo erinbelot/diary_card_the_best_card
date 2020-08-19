@@ -56,7 +56,7 @@ export default function HomeScreen() {
       pageAnswer={pageAnswer}
     />,
     <HappyFeelingsLayout
-      question="happy?"
+      question="How joyful were you today?"
       handleSaveAndNext={handleSaveAndNext}
       setPageAnswer={setPageAnswer}
       pageAnswer={pageAnswer}

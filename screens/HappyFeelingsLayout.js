@@ -6,6 +6,15 @@ export default function HappyFeelingsLayout( { pageAnswer, setPageAnswer, handle
   
   return (
     <>
+      <Image
+        source={
+          __DEV__
+            ? require("../assets/images/joy.png")
+            : require("../assets/images/joy.png")
+        }
+        style={styles.welcomeImage}
+      />
+      <Text>Joy</Text>
       <Text style={styles.developmentModeText}>{question}</Text>
       <NextButton onPress={() => { handleSaveAndNext(question) }} />
     </>
