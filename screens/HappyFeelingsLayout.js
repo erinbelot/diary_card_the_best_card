@@ -16,9 +16,21 @@ export default function HappyFeelingsLayout( { pageAnswer, setPageAnswer, handle
       />
       <Text>Joy</Text>
       <Text style={styles.developmentModeText}>{question}</Text>
+     
       <NextButton onPress={() => { handleSaveAndNext(question) }} />
     </>
   )};
+
+  // render() {
+  //   return (
+  //     <ScrollView scrollEnabled={this.state.scrollEnabled}>
+  //      <MultiSlider
+  //        ...
+  //        onValuesChangeStart={this.disableScroll}
+  //        onValuesChangeFinish={this.enableScroll}
+  //      />
+  //    </ScrollView>
+  //    );
 
   const styles = StyleSheet.create({
     welcomeContainer: {

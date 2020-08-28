@@ -11,8 +11,8 @@ export default function HabitLayout( { pageAnswer, setPageAnswer, handleSaveAndN
         <Image
           source={
             __DEV__
-              ? require("../assets/images/green-man.png")
-              : require("../assets/images/green-man.png")
+              ? require("../assets/images/urge-man.png")
+              : require("../assets/images/urge-man.png")
           }
           style={styles.welcomeImage}
         />
