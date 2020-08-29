@@ -44,13 +44,13 @@ export default function HomeScreen() {
 
   const pages = [
     <HabitLayout
-      question="How strong was your urge to use drugs?"
+      question={`How strong was \n your urge to gamble?`}
       pageAnswer={pageAnswer}
       handleSaveAndNext={handleSaveAndNext}
       setPageAnswer={setPageAnswer}
     />,
     <QuestionLayout
-      question="outside?"
+      question="Have you gambled today?"
       handleSaveAndNext={handleSaveAndNext}
       setPageAnswer={setPageAnswer}
       pageAnswer={pageAnswer}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
-// import HappinessButton from '../components/HappinessButton';
-const valueToSymbols = ['▁','▂','▆','█']
+// import HappinessButton from '../components/HappinessButton'
 
 export default function ListOfRangeButtons( { questions, useSymbols, pageAnswer, setPageAnswer } ) {
   return (
@@ -12,143 +11,82 @@ export default function ListOfRangeButtons( { questions, useSymbols, pageAnswer,
               <View key={`key_${n}`}>
                 <TouchableOpacity
                   key={`option_${n}`}
-                  style={n === pageAnswer ? styles.highlightedButton : styles.standardButton}
+                  style={[
+                    styles.buttonGraph,
+                    styles[`buttonGraphSize${n}`],
+                    (n === pageAnswer ? styles.buttonGraphHighlight : null)
+                  ]}
                   onPress={() => { setPageAnswer(n) }}>
-                  <Text>{useSymbols ? valueToSymbols[n] : n}</Text>
+                  <Text>{useSymbols ? '' : n}</Text>
                 </TouchableOpacity>
               </View>
             )
           })}
         </View>
-
  )};
 
  const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  highlightedButton: {
-    // backgroundColor: '#f59',
-    // borderWidth: 2,
-    // borderStyle: 'solid',
-    // borderColor: 'gray',
-    // borderRadius: 100,
-    height: 170,
-    width: 70,
-    padding: 10,
-    display: 'flex',
-    margin: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  standardButton: {
-    // backgroundColor: '#9af',
-    // borderWidth: 2,
-    // borderStyle: 'solid',
-    // borderColor: 'gray',
-    // borderRadius: 100,
-    height: 70,
-    width: 70,
-    padding: 10,
-    display: 'flex',
-    margin: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 20,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 300,
-    height: 300,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-    fontSize: 37,
-
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-
   answerOptions: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
     flexDirection: 'row',
+    paddingBottom: 60,
+  },
+  selectedGraphButton: {
+    backgroundColor: '#ffffff',
+  },
+  buttonGraph: {
+    backgroundColor: '#FFC0CB',
+    height: 60,
+    width: 70,
+    borderRadius:10,
+    margin: 10,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+
+    elevation: 2,
+  },
+  buttonGraphSize0: {
+    height: 60,
+  },
+  buttonGraphSize1: {
+    height: 90,
+  },
+  buttonGraphSize2: {
+    height: 120,
+  },
+  buttonGraphSize3: {
+    height: 150,
+  },
+  buttonGraphHighlight: {
+    backgroundColor: '#ffccff',
   },
 
-  answerOption: {
+  highlightedGraphButton: {
+    backgroundColor: '#A4A7B1',
+
+    borderRadius: 100,
+    height: 60,
+    width: 115,
+    display: 'flex',
+    margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+
+    elevation: 2,
 
   }
 });

@@ -17,7 +17,7 @@ export default function QuestionLayout( { question, handleSaveAndNext, pageAnswe
         />
       </View>
       <Text style={styles.developmentModeText}>{question}</Text>
-      <ListOfRangeButtons questions={['yes', 'no']} pageAnswer={pageAnswer} setPageAnswer={setPageAnswer} />
+      <ListOfRangeButtons questions={['Yes', 'No']} pageAnswer={pageAnswer} setPageAnswer={setPageAnswer} />
       <NextButton onPress={() => { handleSaveAndNext(question) }} />
     </>
   )
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
+    backgroundColor: '#ffffff',
   },
   welcomeImage: {
     width: 300,
