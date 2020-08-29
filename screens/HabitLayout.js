@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, Image, View, Styles } from 'react-native';
 import  HappinessButton  from '../components/HappinessButton';
 import NextButton from '../components/NextButton';
-import  ListOfRangeButtons from '../components/ListOfRangeButtons';
+import  GraphButtons from '../components/GraphButtons';
 
 export default function HabitLayout( { pageAnswer, setPageAnswer, handleSaveAndNext, question } ) {
   return (
@@ -18,7 +18,7 @@ export default function HabitLayout( { pageAnswer, setPageAnswer, handleSaveAndN
         />
       </View>
       <Text style={styles.developmentModeText}>{question}</Text>
-      <ListOfRangeButtons questions={[0,1,2,3]} useSymbols pageAnswer={pageAnswer} setPageAnswer={setPageAnswer} />
+      <GraphButtons questions={[0,1,2,3]} useSymbols pageAnswer={pageAnswer} setPageAnswer={setPageAnswer} />
       <NextButton onPress={() => { handleSaveAndNext(question) }} />
     </>
   )};

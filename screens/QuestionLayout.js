@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, Image, View, Styles } from 'react-native';
 import NextButton from '../components/NextButton';
-import ListOfRangeButtons from '../components/ListOfRangeButtons';
+import GraphButtons from '../components/GraphButtons';
 
 export default function QuestionLayout( { question, handleSaveAndNext, pageAnswer, setPageAnswer } ) {
   return (
@@ -17,7 +17,7 @@ export default function QuestionLayout( { question, handleSaveAndNext, pageAnswe
         />
       </View>
       <Text style={styles.developmentModeText}>{question}</Text>
-      <ListOfRangeButtons questions={['Yes', 'No']} pageAnswer={pageAnswer} setPageAnswer={setPageAnswer} />
+      <GraphButtons questions={['Yes', 'No']} pageAnswer={pageAnswer} setPageAnswer={setPageAnswer} />
       <NextButton onPress={() => { handleSaveAndNext(question) }} />
     </>
   )

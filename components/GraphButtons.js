@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 // import HappinessButton from '../components/HappinessButton'
 
-export default function ListOfRangeButtons( { questions, useSymbols, pageAnswer, setPageAnswer } ) {
+export default function GraphButtons( { questions, useSymbols, pageAnswer, setPageAnswer } ) {
   return (
     <View style={styles.answerOptions}>
           {questions.map ((n) =>
