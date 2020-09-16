@@ -8,6 +8,7 @@ import { MonoText } from '../components/StyledText';
 import HabitLayout from '../screens/HabitLayout';
 import QuestionLayout from '../screens/QuestionLayout';
 import HappyFeelingsLayout from '../screens/HappyFeelingsLayout';
+import MindfulnessLayout from '../screens/MindfulnessLayout';
 
 // import NavigationBar from '../navigation/BottomTabNavigator';
 
@@ -61,6 +62,13 @@ export default function HomeScreen() {
       setPageAnswer={setPageAnswer}
       pageAnswer={pageAnswer}
     />,
+    <MindfulnessLayout
+      question="Which skills have you practised today?"
+      handleSaveAndNext={handleSaveAndNext}
+      setPageAnswer={setPageAnswer}
+      pageAnswer={pageAnswer}
+    />,
+
   ];
   return pages[currentPageNumber]
 
