@@ -9,7 +9,7 @@ import HabitLayout from '../screens/HabitLayout';
 import QuestionLayout from '../screens/QuestionLayout';
 import HappyFeelingsLayout from '../screens/HappyFeelingsLayout';
 import MindfulnessLayout from '../screens/MindfulnessLayout';
-
+import ContextLayout from '../screens/ContextLayout';
 // import NavigationBar from '../navigation/BottomTabNavigator';
 
 export default function HomeScreen() {
@@ -68,6 +68,12 @@ export default function HomeScreen() {
       setPageAnswer={setPageAnswer}
       pageAnswer={pageAnswer}
     />,
+    <ContextLayout
+    question="Environment"
+    handleSaveAndNext={handleSaveAndNext}
+    setPageAnswer={setPageAnswer}
+    pageAnswer={pageAnswer}
+  />,
 
   ];
   return pages[currentPageNumber]
