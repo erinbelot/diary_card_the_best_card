@@ -33,11 +33,6 @@ export default function HappyFeelingsLayout( { pageAnswer, setPageAnswer, handle
   //    );
 
   const styles = StyleSheet.create({
-    welcomeContainer: {
-      alignItems: 'center',
-      marginTop: 10,
-      marginBottom: 20,
-    },
     welcomeImage: {
       width: 300,
       height: 300,
