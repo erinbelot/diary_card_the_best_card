@@ -8,14 +8,17 @@ export default function MindfulnessLayout( { pageAnswer, setPageAnswer, handleSa
     <>
       <Text style={styles.HeadingText}>Mindfulness</Text>
       <Text style={styles.developmentModeText}>{question}</Text>
-      <Image
+      <TouchableOpacity style={styles.welcomeContainer}>
+        <Image
           source={
             __DEV__
               ? require("../assets/images/purple-emoji.png")
-              : require("../assets/images/urge-man.png")
+              : require("../assets/images/green-man.png")
           }
           style={styles.emoji}
         />
+        <Text style={styles.SkillsText}>Wise Mind</Text>
+      </TouchableOpacity>
       <NextButton onPress={() => { handleSaveAndNext(question) }} />
     </>
   )};
@@ -36,6 +39,13 @@ export default function MindfulnessLayout( { pageAnswer, setPageAnswer, handleSa
       color: 'rgba(103, 106, 121, 0.9)',
       fontSize: 30,
       textAlign: 'center',
+    },
+
+    SkillsText:{
+      color: 'rgba(103, 106, 121, 0.9)',
+      marginLeft: 150,
+      marginBottom: 420,
+      // this is literally here to push the next button into position. it's dumb and needs to be changed
     },
 
     emoji: {
